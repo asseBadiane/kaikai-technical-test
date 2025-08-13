@@ -136,4 +136,4 @@ Fork the repo, create a branch, commit changes, and open a PR if needed.
 This project is for Kaikai technical evaluation and is unlicensed for public use.
 
 ---
-Ready to showcase data-driven air quality insights with DevOps automation! 🌟 If issues arise, email recrutement@kaikai.dev.
+Ready to showcase data-driven air quality insights with DevOps automation! 🌟.
