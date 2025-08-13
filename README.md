@@ -124,9 +124,6 @@ pytest test_analyze.py
 ## Contributeurs
 - Asse Badiane: Développeur principal (all parts implemented).
 
-## Contribution
-Fork the repo, create a branch, commit changes, and open a PR if needed.
-
 ## Licence
 This project is for Kaikai technical evaluation and is unlicensed for public use.
 
