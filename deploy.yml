@@ -1,0 +1,34 @@
+---
+- name: Configure local machine for sensor analysis
+  hosts: localhost
+  become: yes  # Requires sudo privileges in WSL2
+  tasks:
+    - name: Ensure Docker is installed
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+      # Skip if already installed (check your `docker ps` output)
+
+    - name: Ensure Docker is running
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Deploy sensor analysis container
+      docker_container:
+        name: sensor-analysis
+        image: technical-test-sensor-analysis:latest  # Matches your built image
+        state: started
+        volumes:
+          - /mnt/c/Users/badia/OneDrive/Desktop/ASSE/Test-Technique/Technical-Test/data:/app  # WSL2 path to your data
+        command: "python analyze_sensor_data.py capteur_temp.csv"
+
+    - name: Schedule daily execution
+      cron:
+        name: "Run sensor analysis"
+        minute: "0"
+        hour: "2"
+        job: "docker exec sensor-analysis python analyze_sensor_data.py capteur_temp.csv > /var/log/sensor_analysis.log 2>&1"
+        state: present

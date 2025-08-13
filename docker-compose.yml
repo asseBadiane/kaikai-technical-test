@@ -1,0 +1,7 @@
+services:
+  sensor-analysis:
+    build: .
+    volumes:
+      - ./data:/app/data
+    environment:
+      - DATA_FILE=data/capteur_temp.csv

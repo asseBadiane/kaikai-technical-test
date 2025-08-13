@@ -1,0 +1,37 @@
+stages:
+  - test
+  - build
+  - deploy
+  - notify
+
+test:
+  stage: test
+  image: python:3.12-slim
+  script:
+    - pip install pytest
+    - pytest test_analyze.py
+  artifacts:
+    paths:
+      - test_results/
+
+build:
+  stage: build
+  image: docker:20.10
+  services:
+    - docker:dind
+  script:
+    - docker build -t my-registry/sensor-analysis:latest .
+    - docker push my-registry/sensor-analysis:latest
+
+deploy:
+  stage: deploy
+  image: alpine
+  script:
+    - echo "Déploiement sur staging (simulé) : ssh user@staging 'docker pull my-registry/sensor-analysis:latest && docker run sensor-analysis'"
+  environment: staging
+
+notify:
+  stage: notify
+  image: curlimages/curl
+  script:
+    - curl -X POST -H 'Content-type: application/json' --data '{"text":"Déploiement terminé !"}' https://hooks.slack.com/services/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
