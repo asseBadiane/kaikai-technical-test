@@ -121,11 +121,6 @@ Run unit tests:
 pytest test_analyze.py
 ```
 
-## Documentation Additionnelle
-- **Report**: See `report.md` (create if needed) for DevOps explanations, SQL results, and justifications.
-- **Colab Notebook**: Python code available in Google Colab: [Link to Colab] (add your shared Colab URL here).
-- **Assumptions**: Code handles large files; timestamps use 'Local Date/Time'; no real staging server for deploy (simulated).
-
 ## Contributeurs
 - Asse Badiane: Développeur principal (all parts implemented).
 
